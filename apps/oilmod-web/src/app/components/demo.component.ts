@@ -7,23 +7,19 @@ import { NgIf } from '@angular/common';
   selector: 'sto-demo',
   template: `
     <ng-content></ng-content>
-    <mat-expansion-panel *ngIf="code"
-                         style="margin-bottom: 80px; margin-top: 16px;">
+    <mat-expansion-panel
+      *ngIf="code"
+      style="margin-bottom: 80px; margin-top: 16px;"
+    >
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          Code
-        </mat-panel-title>
+        <mat-panel-title> Code </mat-panel-title>
       </mat-expansion-panel-header>
       <pre><code [lineNumbers]="true"
                  [highlight]="code"></code></pre>
     </mat-expansion-panel>
   `,
-  imports: [
-    MatExpansionModule,
-    HighlightModule,
-    NgIf
-  ],
-  standalone: true
+  imports: [MatExpansionModule, HighlightModule, NgIf],
+  standalone: true,
 })
 export class DemoComponent {
   @Input()

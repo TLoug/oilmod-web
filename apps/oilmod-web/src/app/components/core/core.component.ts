@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { StylesComponent } from './styles.component';
 
 @Component({
-  template: `
-    <sto-styles></sto-styles>`,
+  template: ` <sto-styles></sto-styles>`,
   standalone: true,
-  imports: [ StylesComponent ]
+  imports: [StylesComponent],
 })
-export class CoreComponent {
-}
+export class CoreComponent {}

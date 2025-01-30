@@ -1,6 +1,7 @@
+<!-- !TODO check mat form fields if required mat-label -->
+
 <div class="sto-form" style="width: 100%" *ngIf="isFilter;else noFilter">
-  <mat-form-field class="sto-form__field sto-form__field--without-placeholder"
-                  floatLabel="never">
+  <mat-form-field class="sto-form__field sto-form__field--without-placeholder">
         <span matPrefix
               *ngIf="isMulti !== false">
             <mat-checkbox color="primary"
