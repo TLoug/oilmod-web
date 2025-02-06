@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+export const BreadcrumbsComponentCode = `
 import { Component } from '@angular/core';
 import { DemoComponent } from '../../../demo.component';
 import { StoBreadcrumbsComponent } from '@ngx-stoui/common';
@@ -7,11 +7,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { BreadcrumbsComponentCode } from './breadcrumbs.component.code';
 
 @Component({
-  template: `
+  template: \`
     <sto-demo [code]="BreadcrumbsComponentCode">
       <sto-breadcrumbs [model]="model"> </sto-breadcrumbs>
     </sto-demo>
-  `,
+  \`,
   standalone: true,
   imports: [
     DemoComponent,
@@ -20,6 +20,7 @@ import { BreadcrumbsComponentCode } from './breadcrumbs.component.code';
     MatButtonModule,
   ],
 })
+  
 export class BreadcrumbsDemoComponent {
   BreadcrumbsComponentCode = BreadcrumbsComponentCode;
   public model: any[] = [
@@ -38,4 +39,4 @@ export class BreadcrumbsDemoComponent {
   public home: any;
   public homeicon: string;
   public svgIcon: boolean;
-}
+`;

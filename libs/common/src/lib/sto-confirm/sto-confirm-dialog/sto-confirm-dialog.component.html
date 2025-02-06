@@ -1,0 +1,20 @@
+<h3 *ngIf="data.showCancel" mat-dialog-title>
+{{ data.title }}
+</h3>
+<div mat-dialog-content
+*ngIf="data.showCancel">
+<p>{{ data.message }}</p>
+</div>
+<div mat-dialog-actions>
+<button #ok
+*ngIf="data.showCancel"
+      color="primary"
+      mat-flat-button
+      [mat-dialog-close]="true">{{ data.confirmText }}</button>
+<button #cancel
+      *ngIf="data.showCancel"
+      title="Cancel (esc)"
+      mat-button
+      [mat-dialog-close]="false">Cancel
+</button>
+</div>

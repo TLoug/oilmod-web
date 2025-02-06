@@ -9,24 +9,22 @@ import {
   OnChanges,
   Output,
   SimpleChanges,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
-const COLORS = [
-  'primary', 'accent', 'warning', 'danger', 'success'
-];
+const COLORS = ['primary', 'accent', 'warning', 'danger', 'success'];
 
 @Component({
   selector: 'sto-message-panel',
   templateUrl: './sto-message-panel.component.html',
-  styleUrls: [ './sto-message-panel.component.scss' ],
+  styleUrls: ['./sto-message-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [ MatIconModule, MatButtonModule, NgIf ],
+  imports: [MatIconModule, MatButtonModule, NgIf],
 })
 /**
  * Message panel to display inline info boxes.
@@ -42,7 +40,8 @@ const COLORS = [
  */
 export class StoMessagePanelComponent implements OnChanges, AfterViewInit {
   @Input()
-  color: 'primary' | 'accent' | 'warning' | 'danger' | 'success' = 'primary';
+  color: 'primary' | 'accent' | 'warning' | 'warn' | 'danger' | 'success' =
+    'primary';
   /**
    * @deprecated
    * severity was used to signify behaviour. Now you should use icon + color.
@@ -60,8 +59,7 @@ export class StoMessagePanelComponent implements OnChanges, AfterViewInit {
    */
   @Input() dismissable: boolean;
 
-  constructor(private elRef: ElementRef<HTMLElement>) {
-  }
+  constructor(private elRef: ElementRef<HTMLElement>) {}
 
   @HostBinding('class.warning')
   get warning() {
@@ -80,11 +78,11 @@ export class StoMessagePanelComponent implements OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     const el = this.elRef.nativeElement;
-    if ( changes.color ) {
-      el.classList.remove(...COLORS.map(c => `mat-${c}`));
+    if (changes.color) {
+      el.classList.remove(...COLORS.map((c) => `mat-${c}`));
       el.classList.add(`mat-${changes.color.currentValue}`);
     }
-    if ( changes.dismissable ) {
+    if (changes.dismissable) {
       const dismissable = changes.dismissable.currentValue;
       this.setDismissableClass(dismissable, el);
     }
@@ -97,7 +95,7 @@ export class StoMessagePanelComponent implements OnChanges, AfterViewInit {
   }
 
   private setDismissableClass(dismissable: boolean, el: HTMLElement) {
-    if ( dismissable ) {
+    if (dismissable) {
       el.classList.add('sto-message-panel--dismissable');
     } else {
       el.classList.remove('sto-message-panel--dismissable');
