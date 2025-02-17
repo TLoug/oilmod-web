@@ -43,7 +43,7 @@
            (click)="$event.stopPropagation()"
            [arrowPosition]="column.sortArrowPosition || 'after'"
            [disabled]="column.disableSort"
-           [mat-sort-header]="column.$$id"
+           [mat-sort-header]="column.$$id ? column.$$id :''"
            [sortActionDescription]="'Sort by ' + column.name"
            class="sto-mdl-table__header__row__cell__label"
            role="columnheader">

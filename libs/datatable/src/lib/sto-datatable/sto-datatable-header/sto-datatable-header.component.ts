@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { Column, ColumnDisplay, Group } from '../columns';
 import { HeaderContextMenu } from '../events';
 import { Sort } from '@angular/material/sort';
@@ -48,15 +54,11 @@ export class StoDatatableHeaderComponent<T = Record<string, unknown>> {
 
   ColumnDisplay = ColumnDisplay;
   public tempWidth: string | null;
-
   public headerWidthMap: Record<number, number> = {};
-
-  @Output()
-  resized = new EventEmitter<{ columns: Column[], column: Column }>();
-
   public sortDirection: 'asc' | 'desc' | null;
 
-
+  @Output()
+  resized = new EventEmitter<{ columns: Column[]; column: Column }>();
   @Output()
   headerContextMenu = new EventEmitter<HeaderContextMenu>();
   @Output()
@@ -71,7 +73,7 @@ export class StoDatatableHeaderComponent<T = Record<string, unknown>> {
     const cell = el.parentElement as HTMLDivElement;
     const distance = event.distance.x;
     const def = event.source.data;
-    let flexBasis = ( def.flexBasis ?? 80 ) + distance;
+    let flexBasis = (def.flexBasis ?? 80) + distance;
     flexBasis = flexBasis < 80 ? 80 : flexBasis;
     cell.style.flexBasis = `${flexBasis}px`;
   }
@@ -79,22 +81,24 @@ export class StoDatatableHeaderComponent<T = Record<string, unknown>> {
   onResizeComplete(event: CdkDragEnd<Column>) {
     const distance = event.distance.x;
     const col = event.source.data;
-    const cell = event.source.element.nativeElement.parentElement as HTMLDivElement;
-    let flexBasis = ( col.flexBasis ?? 80 ) + distance;
-    if ( col.flexGrow || col.flexBasis ) {
+    const cell = event.source.element.nativeElement
+      .parentElement as HTMLDivElement;
+    let flexBasis = (col.flexBasis ?? 80) + distance;
+    if (col.flexGrow || col.flexBasis) {
       flexBasis = cell.clientWidth;
     }
     flexBasis = flexBasis < 80 ? 80 : flexBasis;
-    const columns = this.columns
-      .map(c => {
-        if ( c.prop === col.prop ) {
-          return {
-            ...c,
-            flexBasis, flexGrow: 0, flexShrink: 0
-          };
-        }
-        return c;
-      });
+    const columns = this.columns.map((c) => {
+      if (c.prop === col.prop) {
+        return {
+          ...c,
+          flexBasis,
+          flexGrow: 0,
+          flexShrink: 0,
+        };
+      }
+      return c;
+    });
     const column = { ...col, flexBasis, flexGrow: 0, flexShrink: 0 };
     this.resized.emit({ columns, column });
   }
@@ -102,7 +106,7 @@ export class StoDatatableHeaderComponent<T = Record<string, unknown>> {
   public _onResize(column: Column, flexBasis: number): void {
     const width = 0;
     const colIndex = this.columns.indexOf(column);
-    this.headerWidthMap[ colIndex ] = flexBasis;
+    this.headerWidthMap[colIndex] = flexBasis;
     /*    const cols = this.columns
           .map(c => {
             if ( c === column ) {
@@ -111,22 +115,21 @@ export class StoDatatableHeaderComponent<T = Record<string, unknown>> {
             width = width + c.flexBasis;
             return c;
           });*/
-    this.tempWidth = ( this.offset + width ) + 'px';
+    this.tempWidth = this.offset + width + 'px';
     // this.columns = [...cols];
   }
 
   onResizeEnd(col: Column, flexBasis: number) {
     // this.onResize(column, flexBasis);
-    const columns = this.columns
-      .map(c => {
-        if ( c === col ) {
-          return {
-            ...c,
-            flexBasis
-          };
-        }
-        return c;
-      });
+    const columns = this.columns.map((c) => {
+      if (c === col) {
+        return {
+          ...c,
+          flexBasis,
+        };
+      }
+      return c;
+    });
     this.tempWidth = null;
     const column = { ...col, flexBasis };
     this.resized.emit({ columns, column });

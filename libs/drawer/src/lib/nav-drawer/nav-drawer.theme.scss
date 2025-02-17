@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
-@import "theme/theme";
-@import "theme/typography";
+// @import "theme/theme";
+// @import "theme/typography";
 
 
 body {
@@ -114,14 +114,14 @@ body {
   }
 }
 
-.mat-typography:not(.sto-sm-typography):not(.sto-l-typography) {
-  @include navigation-drawer-typography($sto-typography);
-}
+// .mat-typography:not(.sto-sm-typography):not(.sto-l-typography) {
+//   @include navigation-drawer-typography($sto-typography);
+// }
 
-.mat-typography.sto-sm-typography {
-  @include navigation-drawer-typography($sto-sm-typography);
-}
+// .mat-typography.sto-sm-typography {
+//   @include navigation-drawer-typography($sto-sm-typography);
+// }
 
-.mat-typography.sto-l-typography {
-  @include navigation-drawer-typography($sto-l-typography);
-}
+// .mat-typography.sto-l-typography {
+//   @include navigation-drawer-typography($sto-l-typography);
+// }
